@@ -83,6 +83,9 @@ public class Character : MonoBehaviour
 
     public void OnSelect()
     {
+        if (Time.timeScale == 0.0f)
+            return;
+
         if (audioSource.isPlaying)
             return;
 

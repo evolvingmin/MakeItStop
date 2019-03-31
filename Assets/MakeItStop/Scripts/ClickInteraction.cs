@@ -25,6 +25,9 @@ public class ClickInteraction : MonoBehaviour
 
     public void OnSelect()
     {
+        if (Time.timeScale == 0.0f)
+            return;
+
         audioSource.Play();
     }
 }
