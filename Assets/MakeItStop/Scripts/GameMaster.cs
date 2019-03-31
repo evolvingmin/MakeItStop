@@ -19,5 +19,6 @@ public class GameMaster : MonoBehaviour
     public void Reset()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        Time.timeScale = 1.0f;
     }
 }
