@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 using Random = UnityEngine.Random;
 
 public class Character : MonoBehaviour
@@ -11,6 +12,9 @@ public class Character : MonoBehaviour
     private Animator anim;
 
     private AudioSource audioSource;
+
+    [SerializeField]
+    private TextMeshPro textDisplay;
 
     private float speed = 15.0f;
     private float pushBackPower = 2.5f;
@@ -45,7 +49,7 @@ public class Character : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Running") == false)
             return;
 
-        transform.transform.position += fowardSpeed * Vector3.back;
+        transform.transform.position += fowardSpeed * Vector3.back * Time.timeScale;
     }
 
     IEnumerator Wonder()
@@ -86,5 +90,14 @@ public class Character : MonoBehaviour
         audioSource.Play();
 
         transform.DOMove(transform.position + Vector3.forward * pushBackPower, 0.5f);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("EndVolume"))
+        {
+            Time.timeScale = 0.0f;
+            textDisplay.text = "I Got you!";
+        }
     }
 }
